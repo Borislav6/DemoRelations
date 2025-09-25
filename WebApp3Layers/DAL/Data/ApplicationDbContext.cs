@@ -20,7 +20,14 @@ namespace DAL.Data
                 .HasOne(a => a.Biography)
                 .WithOne(b => b.Author)
                 .HasForeignKey<Biography>(b => b.AuthorId);
+            builder.Entity<Company>()
+             .HasMany(c => c.Employees)
+             .WithOne(e => e.Company)
+             .HasForeignKey(e => e.CompaniId);
             base.OnModelCreating(builder);
+         
         }
+        public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<Company> Companies { get; set; }
     }
 }
